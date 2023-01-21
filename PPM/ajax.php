@@ -86,7 +86,6 @@ if($action == "delete_position"){
 		echo $save;
 }
 if($action == "save_deduction"){
-	
 	$save = $crud->save_deduction();
 	if($save)
 		echo $save;

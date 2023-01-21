@@ -165,19 +165,19 @@ Class Action {
 		if($save)
 			return 1;
 	}
-	function save_deduction(){
+function save_deduction(){
 		extract($_POST);
-		
 		$save = $this->db->query("INSERT INTO monthly_salary (EMP_ID, SALARY, ALLOWANCE, DEDUCTION) VALUES ($id, $salary, $allowance, $deduction)");
-	
 		if(!$save){
 			error_log("Error: Failed to execute the query: " . $this->db->error, 0);
 		}
 		echo $this->db->error;
 		if($save)
 			return 1;
-	}
-	
+		
+	} 
+
+	  
 	function delete_employee(){
 		extract($_POST);
 		$delete = $this->db->query("DELETE FROM employee where EMP_ID = ".$id);

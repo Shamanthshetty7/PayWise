@@ -2,6 +2,15 @@
     session_start();
     include 'db_connect.php'; 
     $id = $_GET['id'];
+    $salary_qry = $conn->query("SELECT * FROM monthly_salary WHERE EMP_ID = '".$id."'") or die(mysqli_error());
+   $salary_row = $salary_qry->fetch_array();
+   if ($salary_qry->num_rows >0) {
+      return 0;
+    }
+    //to dlete all the rec ords older than 1 month below code is used
+        $query = "DELETE from monthly_salary WHERE UPDATED_DATE < NOW() - INTERVAL 30 DAY";
+        $stmt = $conn->prepare($query);
+        $stmt->execute();
     if(!empty($id)){
         $query = "SELECT e.*,d.DNAME as dname,p.PNAME as pname FROM employee e inner join department d on e.DEPT_ID = d.DEPT_ID inner join position p on e.POSITION_ID = p.POS_ID where e.EMP_ID = ?";
         $stmt = $conn->prepare($query);
@@ -23,11 +32,6 @@
 ?>
 <div class="container-fluid">
     <div class="col-md-12">
-        <h5><b><small>Employee ID :</small><?php echo $EMPLOYEE_NO ?></b></h5>
-        <h4><b><small>Name: </small><?php echo ucwords($LASTNAME.", ".$FIRSTNAME." ") ?></b></h4>
-        <p><b>    Department : <?php echo ucwords($dname) ?></b></p>
-        <p><b>   Position : <?php echo ucwords($pname) ?></b></p>
-        <hr class="divider">
         <div class="row">
             <div class="col-md-6">
                 <div class="card">
@@ -52,7 +56,7 @@
     $(document).ready(function(){
         $('.deduction').click(function(){
             var $id=$(this).attr('data-id');
-            uni_modal("Edit Employee","deduction.php?id="+$id);
+            uni_2("Edit Employee","deduction.php?id="+$id);
         });
     });
 </script>

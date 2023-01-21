@@ -52,7 +52,7 @@ $stmt->close();
     </form>
 </div>
 <script>
-     $('#deduction_frm').submit(function(e){
+    $(document).ready(function(){  $('#deduction_frm').submit(function(e){
         
                 e.preventDefault()
                 start_load();
@@ -63,14 +63,20 @@ $stmt->close();
 				error:err=>console.log(),
 				success:function(resp){
 						if(resp == 1){
-							alert_toast("Employee's data successfully saved","success");
+							alert_toast("Salary slip updated successfully","success");
 								setTimeout(function(){
 								location.reload();
 
 							},1000)
-						}
+						}else {
+                            alert_toast("Already calculated","success");
+								setTimeout(function(){
+								location.reload();
+
+							},1000)
+                        }
 				}
 			})
         })
-   
+    });
 </script>

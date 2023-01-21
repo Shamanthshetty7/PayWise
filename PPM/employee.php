@@ -51,6 +51,7 @@
 										 <button class="btn btn-sm btn-outline-primary view_employee" data-id="<?php echo $row['EMP_ID']?>" type="button"><i class="fa fa-eye"></i></button>
 										 <button class="btn btn-sm btn-outline-primary edit_employee" data-id="<?php echo $row['EMP_ID']?>" type="button"><i class="fa fa-edit"></i></button>
 										<button class="btn btn-sm btn-outline-danger remove_employee" data-id="<?php echo $row['EMP_ID']?>" type="button"><i class="fa fa-trash"></i></button>
+										<button class="btn btn-sm btn-outline-danger salary_slip" data-id="<?php echo $row['EMP_ID']?>" type="button"><i class="fa fa-book"></i></button>
 										</center>
 									</td>
 								</tr>
@@ -87,8 +88,14 @@
 				uni_modal("Employee Details","view_employee.php?id="+$id,"mid-large")
 				
 			});
+			$('.salary_slip').click(function(){
+				var $id=$(this).attr('data-id');
+				uni_modal("Salary Slip details","salary_slip.php?id="+$id,"mid-large")
+
+			});
 			$('#new_emp_btn').click(function(){
 				uni_modal("New Employee","manage_employee.php")
+				
 			})
 			$('.remove_employee').click(function(){
 				_conf("Are you sure to delete this employee?","remove_employee",[$(this).attr('data-id')])
