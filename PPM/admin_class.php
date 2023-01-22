@@ -176,7 +176,19 @@ function save_deduction(){
 			return 1;
 		
 	} 
-
+function check_slip(){
+	extract($_POST);
+	$save = $this->db->query("SELECT * FROM monthly_salary WHERE EMP_ID =$id");
+	if(!$save){
+		error_log("Error: Failed to execute the query: " . $this->db->error, 0);
+	}
+	echo $this->db->error;
+	if ($save->num_rows > 0) {
+		return 1;
+	}else{
+		return 0;
+	}
+}
 	  
 	function delete_employee(){
 		extract($_POST);

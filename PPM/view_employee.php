@@ -2,11 +2,6 @@
     session_start();
     include 'db_connect.php'; 
     $id = $_GET['id'];
-    $salary_qry = $conn->query("SELECT * FROM monthly_salary WHERE EMP_ID = '".$id."'") or die(mysqli_error());
-   $salary_row = $salary_qry->fetch_array();
-   if ($salary_qry->num_rows >0) {
-      return 0;
-    }
     //to dlete all the rec ords older than 1 month below code is used
         $query = "DELETE from monthly_salary WHERE UPDATED_DATE < NOW() - INTERVAL 30 DAY";
         $stmt = $conn->prepare($query);
@@ -56,7 +51,7 @@
     $(document).ready(function(){
         $('.deduction').click(function(){
             var $id=$(this).attr('data-id');
-            uni_2("Edit Employee","deduction.php?id="+$id);
+            uni_modal("Edit Employee","deduction.php?id="+$id);
         });
     });
 </script>

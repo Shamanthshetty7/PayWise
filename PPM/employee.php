@@ -48,10 +48,10 @@
 									<td><?php echo $proj['project_num']?></td>
 									<td>
 										<center>
-										 <button class="btn btn-sm btn-outline-primary view_employee" data-id="<?php echo $row['EMP_ID']?>" type="button"><i class="fa fa-eye"></i></button>
-										 <button class="btn btn-sm btn-outline-primary edit_employee" data-id="<?php echo $row['EMP_ID']?>" type="button"><i class="fa fa-edit"></i></button>
-										<button class="btn btn-sm btn-outline-danger remove_employee" data-id="<?php echo $row['EMP_ID']?>" type="button"><i class="fa fa-trash"></i></button>
-										<button class="btn btn-sm btn-outline-danger salary_slip" data-id="<?php echo $row['EMP_ID']?>" type="button"><i class="fa fa-book"></i></button>
+										 <button class="btn btn-sm btn-outline-primary salary_slip" title="Generate Salary slip" data-id="<?php echo $row['EMP_ID']?>" type="button"><i class="fa fa-book"></i></button>
+										 <button class="btn btn-sm btn-outline-primary edit_employee" title="Edit employee details" data-id="<?php echo $row['EMP_ID']?>" type="button"><i class="fa fa-edit"></i></button>
+										<button class="btn btn-sm btn-outline-danger remove_employee" title="Delete employee" data-id="<?php echo $row['EMP_ID']?>" type="button"><i class="fa fa-trash"></i></button>
+										<button class="btn btn-sm btn-outline-danger view_slip" title="Download Salary slip" data-id="<?php echo $row['EMP_ID']?>" type="button"><i class="fa fa-eye"></i></button>
 										</center>
 									</td>
 								</tr>
@@ -83,14 +83,46 @@
 				uni_modal("Edit Employee","manage_employee.php?id="+$id)
 				
 			});
-			$('.view_employee').click(function(){
-				var $id=$(this).attr('data-id');
-				uni_modal("Employee Details","view_employee.php?id="+$id,"mid-large")
-				
-			});
 			$('.salary_slip').click(function(){
 				var $id=$(this).attr('data-id');
-				uni_modal("Salary Slip details","salary_slip.php?id="+$id,"mid-large")
+				$.ajax({
+				url:'ajax.php?action=check_slip',
+				method:"POST",
+				data:{id:$id},
+				error:err=>console.log(err),
+				success:function(resp){
+						if(resp == 1){
+							alert_toast("Salary slip is already calculated","warning");
+								setTimeout(function(){
+								location.reload();
+
+							},1000)
+						}else{
+							uni_modal("Employee Details","view_employee.php?id="+$id,"mid-large")
+						}
+					}
+			})		
+			});
+			$('.view_slip').click(function(){
+				var $id=$(this).attr('data-id');
+				$.ajax({
+				url:'ajax.php?action=check_slip',
+				method:"POST",
+				data:{id:$id},
+				error:err=>console.log(err),
+				success:function(resp){
+						if(resp == 0){
+							alert_toast("Salary slip is not claculated","danger");
+								setTimeout(function(){
+								location.reload();
+
+							},1000)
+						}else{
+							window.location.href = 'salary_slip.php?id=' + $id;
+						}
+					}
+			})		
+				
 
 			});
 			$('#new_emp_btn').click(function(){

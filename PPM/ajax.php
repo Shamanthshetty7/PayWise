@@ -112,3 +112,8 @@ if($action == "calculate_payroll"){
 	if($save)
 		echo $save;
 }
+if($action == 'check_slip'){
+	$login = $crud->check_slip();
+	if($login)
+		echo $login;
+}
