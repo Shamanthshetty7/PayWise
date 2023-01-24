@@ -8,6 +8,7 @@
 session_start();
 include('db_connect.php');
 
+
 $id = $_GET['id'];
 //Retrieve employee information
 $employee_qry=$conn->query("SELECT * FROM employee where EMP_ID=$id") or die(mysqli_error());
@@ -38,6 +39,7 @@ if ($salary_qry->num_rows ==0) {
             border: 1px solid #ccc;
             padding: 20px;
         }
+        
         table {
             width: 100%;
             border-collapse: collapse;
@@ -51,7 +53,9 @@ if ($salary_qry->num_rows ==0) {
         }
     </style>
 </head>
-<body>
+<div class="header" style="background-color:rgba(0, 0, 0, 0.05)">
+
+<body >
     <div class="salary-slip-template">
         <h2>Salary Slip</h2>
         <p>Employee Name: <?php echo $row['FIRSTNAME'] . " " . $row['LASTNAME'];?></p>
@@ -88,42 +92,27 @@ if ($salary_qry->num_rows ==0) {
 
 
         <p>Signature: ____________</p> 
-        <p>Date: <?php echo date("F j, Y"); ?></p>
+        <p>Date :<?php echo date("F j, Y"); ?></p>
     </div>
-    <form method="post">
+   
+<div id="salary-slip-template" class="salary-slip-template">
+<form method="post" id="myform">
         <input type="hidden" name="employee_name" value="<?php echo $row['FIRSTNAME'] . " " . $row['LASTNAME']; ?>">
-        <input type="hidden" name="employee_number" value="<?php echo $row['EMPLOYEE_NO'];?>">
-        <input type="hidden" name="basic_salary" value="<?php echo $salary_row['SALARY']; ?>">
-        <input type="hidden" name="allowances" value="<?php echo $salary_row['ALLOWANCE'];?>">
+        <input type="hidden" name="employee_number" value="<?php echo $row['EMPLOYEE_NO']; ?>">
+        <input type="hidden" name="department" value="<?php echo $department_row['DNAME']; ?>">
+        <input type="hidden" name="designation" value="<?php echo $position_row['PNAME']; ?>">
         <input type="hidden" name="gross_salary" value="<?php echo $salary_row['SALARY']+$salary_row['ALLOWANCE']; ?>">
-        <input type="hidden" name="deductions" value="<?php echo $salary_row['DEDUCTION']; ?>">
-        <input type="hidden" name="net_salary" value="<?php echo  $salary_row['TOTAL_SALARY'];?>">
-<input type="submit" name="download_slip" value="Download">
-<button onclick="goBack()">Go Back</button>
+        <input type="hidden" name="net_salary" value="<?php echo $salary_row['TOTAL_SALARY']; ?>">
+        <button type="button" class="btn btn-primary" id='submit' >Download</button>
+</form>
 
-<script>
-    function goBack() {
-        window.history.back();
-    }
-</script>
-    </form>
+ </div> 
+ </div>
+
+
+
+
+
 </body>
 </html>
-<?php
-if(isset($_POST['download_slip'])){
-    $file_name = $_POST['employee_name'] . " - Salary Slip.pdf";
-    $file_content = "Employee Name: " . $_POST['employee_name'] . "\r\n";
-    $file_content .= "Employee Number: " . $_POST['employee_number'] . "\r\n";
-    $file_content .= "Basic Salary: " . $_POST['basic_salary'] . "\r\n";
-    $file_content .= "Allowances: " . $_POST['allowances'] . "\r\n";
-    $file_content .= "Gross Salary: " . $_POST['gross_salary'] . "\r\n";
-    $file_content .= "Deductions:" . $_POST['deductions'] . "\r\n";
-    $file_content .= "Net Salary: " . $_POST['net_salary'] . "\r\n";
-    header("Content-Disposition: attachment; filename=".$file_name);
-echo $file_content;
-exit();
 
-}
-
-
-?>

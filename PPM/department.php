@@ -127,8 +127,8 @@
 		start_load()
 		var cat = $('#manage-department')
 		cat.get(0).reset()
-		cat.find("[name='DEPT_ID']").val($(this).attr('data-id'))
-		cat.find("[name='DNAME']").val($(this).attr('data-name'))
+		cat.find("[name='id']").val($(this).attr('data-id'))
+		cat.find("[name='name']").val($(this).attr('data-name'))
 		end_load()
 	})
 	$('.delete_department').click(function(){

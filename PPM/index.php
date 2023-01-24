@@ -82,6 +82,20 @@
       </div>
     </div>
   </div>
+  <div class="modal fade" id="uni_slip" role='dialog'>
+    <div class="modal-dialog modal-md" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+        <h5 class="modal-title"></h5>
+      </div>
+      <div class="modal-body">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary"   data-dismiss="modal">Cancel</button>
+      </div>
+      </div>
+    </div>
+  </div>
 </body>
 <script>
 	 window.start_load = function(){
@@ -111,6 +125,34 @@
                     $('#uni_modal .modal-dialog').removeAttr("class").addClass("modal-dialog modal-md")
                 }
                 $('#uni_modal').modal({
+                  show:true,
+                  backdrop:'static',
+                  keyboard:false,
+                  focus:true
+                })
+                end_load()
+            }
+        }
+    })
+}
+window.uni_slip = function($title = '' , $url='',$size=""){
+    start_load()
+    $.ajax({
+        url:$url,
+        error:err=>{
+            console.log()
+            alert("An error occured")
+        },
+        success:function(resp){
+            if(resp){
+                $('#uni_slip .modal-title').html($title)
+                $('#uni_slip .modal-body').html(resp)
+                if($size != ''){
+                    $('#uni_slip .modal-dialog').addClass($size)
+                }else{
+                    $('#uni_slip .modal-dialog').removeAttr("class").addClass("modal-dialog modal-md")
+                }
+                $('#uni_slip').modal({
                   show:true,
                   backdrop:'static',
                   keyboard:false,

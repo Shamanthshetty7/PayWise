@@ -118,7 +118,8 @@
 
 							},1000)
 						}else{
-							window.location.href = 'salary_slip.php?id=' + $id;
+							uni_slip("","salary_slip.php?id="+$id,"mid-large")
+							//window.location.href = 'salary_slip.php?id=' + $id;
 						}
 					}
 			})		

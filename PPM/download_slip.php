@@ -1,3 +1,6 @@
+<?php
+echo $_POST['employee_name'];
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
