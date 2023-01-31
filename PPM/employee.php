@@ -7,7 +7,7 @@
 				<div class="card">
 					<div class="card-header">
 						<span><b>Employee List</b></span>
-						<button class="btn btn-primary btn-sm btn-block col-md-3 float-right" type="button" id="new_emp_btn"><span class="fa fa-plus"></span> Add Employee</button>
+						<button class="btn btn-primary btn-sm btn-block col-md-3 float-right"  type="button" id="new_emp_btn"><span class="fa fa-plus"></span> Add Employee</button>
 					</div>
 					<div class="card-body">
 						<table id="table" class="table table-bordered table-striped">

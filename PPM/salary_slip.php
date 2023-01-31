@@ -31,6 +31,8 @@ if ($salary_qry->num_rows ==0) {
 <html>
 <head>
     <title>Salary Slip</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+
     <style>
         /* Add your CSS styles here */
         .salary-slip-template {
@@ -51,17 +53,23 @@ if ($salary_qry->num_rows ==0) {
         th {
             text-align: left;
         }
+        
+
     </style>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    
 </head>
-<div class="header" style="background-color:rgba(0, 0, 0, 0.05)">
+
+
+
 
 <body >
-    <div class="salary-slip-template">
+    <div class="salary-slip-template" id="salary-slip">
         <h2>Salary Slip</h2>
-        <p>Employee Name: <?php echo $row['FIRSTNAME'] . " " . $row['LASTNAME'];?></p>
+        <p>Employee Name&ensp;&ensp;: <?php echo $row['FIRSTNAME'] . " " . $row['LASTNAME'];?></p>
         <p>Employee Number: <?php echo $row['EMPLOYEE_NO']; ?></p>
-        <p>Department: <?php echo $department_row['DNAME']; ?></p>
-        <p>Designation: <?php echo $position_row['PNAME']; ?></p>
+        <p>Department&emsp;&emsp;&emsp;: <?php echo $department_row['DNAME']; ?></p>
+        <p>Designation&emsp;&emsp; &emsp;: <?php echo $position_row['PNAME']; ?></p>
         <table>
             <tr>
                 <th>Earnings</th>
@@ -93,26 +101,22 @@ if ($salary_qry->num_rows ==0) {
 
         <p>Signature: ____________</p> 
         <p>Date :<?php echo date("F j, Y"); ?></p>
-    </div>
-   
-<div id="salary-slip-template" class="salary-slip-template">
-<form method="post" id="myform">
-        <input type="hidden" name="employee_name" value="<?php echo $row['FIRSTNAME'] . " " . $row['LASTNAME']; ?>">
-        <input type="hidden" name="employee_number" value="<?php echo $row['EMPLOYEE_NO']; ?>">
-        <input type="hidden" name="department" value="<?php echo $department_row['DNAME']; ?>">
-        <input type="hidden" name="designation" value="<?php echo $position_row['PNAME']; ?>">
-        <input type="hidden" name="gross_salary" value="<?php echo $salary_row['SALARY']+$salary_row['ALLOWANCE']; ?>">
-        <input type="hidden" name="net_salary" value="<?php echo $salary_row['TOTAL_SALARY']; ?>">
-        <button type="button" class="btn btn-primary" id='submit' >Download</button>
-</form>
 
- </div> 
+    <button   class="btn btn-primary" onclick="downloadSalarySlip()" id="download-button" >Download</button>
+  
  </div>
-
-
-
-
-
+ <script>
+    function downloadSalarySlip() {
+        document.getElementById("download-button").style.display = "none";
+html2pdf(document.querySelector("#salary-slip"), {
+    margin:       0.5,
+    filename:     '<?php echo $row['FIRSTNAME']; ?>.pdf',
+    image:        { type: 'jpeg', quality: 0.98 },
+    html2canvas:  { dpi: 96, letterRendering: true },
+    jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
+});
+    }
+</script>
 </body>
 </html>
 

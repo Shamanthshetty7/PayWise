@@ -30,7 +30,7 @@
 								<textarea name="name" id="" cols="30" rows="1" class="form-control"></textarea>
 							</div>
 							<div class="form-group">
-								<label class="control-label">SALARY</label>
+								<label class="control-label">Salary</label>
 								<textarea name="salary" id="" cols="30" rows="1" class="form-control"></textarea>
 							</div>
 					</div>
@@ -39,7 +39,7 @@
 						<div class="row">
 							<div class="col-md-12">
 								<button class="btn btn-sm btn-primary col-sm-3 offset-md-3"> Save</button>
-								<button class="btn btn-sm btn-default col-sm-3" type="button" onclick="_reset()"> Cancel</button>
+								<button class="btn btn-sm btn-secondary col-sm-3" type="button" onclick="_reset()"> Cancel</button>
 							</div>
 						</div>
 					</div>
@@ -82,8 +82,8 @@
 										 <p> <b><?php echo $row['SALARY'] ?></b></p>
 									</td>
 									<td class="text-center">
-										<button class="btn btn-sm btn-primary edit_position" type="button" data-id="<?php echo $row['POS_ID'] ?>" data-name="<?php echo $row['PNAME'] ?>" data-salary="<?php echo $row['SALARY'] ?>" data-department_id="<?php echo $row['DEPT_ID'] ?>"  >Edit</button>
-										<button class="btn btn-sm btn-danger delete_position" type="button" data-id="<?php echo $row['POS_ID'] ?>">Delete</button>
+										<button class="btn btn-sm btn-primary edit_position" type="button" title="Edit position details" data-id="<?php echo $row['POS_ID'] ?>" data-name="<?php echo $row['PNAME'] ?>" data-salary="<?php echo $row['SALARY'] ?>" data-department_id="<?php echo $row['DEPT_ID'] ?>"  ><i class="fa fa-edit"></i></button>
+										<button class="btn btn-sm btn-danger delete_position" type="button" title="delete position " data-id="<?php echo $row['POS_ID'] ?>"><i class="fa fa-trash"></i></button>
 									</td>
 								</tr>
 								<?php endwhile; ?>

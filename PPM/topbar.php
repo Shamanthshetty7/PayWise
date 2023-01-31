@@ -2,7 +2,7 @@
 	
 </style>
 
-<nav class="navbar navbar-light fixed-top bg-warning" style="padding:0;min-height:3.5rem">
+<nav class="navbar navbar-light fixed-top  " style="  background: linear-gradient(to right, #516395 0%, #000000 100%);padding:0;min-height:3.5rem">
   <div class="container-fluid mt-2 mb-2">
   	<div class="col-lg-12">
   		<div class="col-md-1 float-left" style="display: flex;">
