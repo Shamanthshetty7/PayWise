@@ -66,8 +66,7 @@ header("location:index.php?page=home");
       left: 0;
       width: 100%;
       height: 100vh; /* changed from 100% to 100vh */
-      background: linear-gradient(to right, #2193b0 0%, #000000 100%);
-      background: url(assets/img/payroll.jfif);
+      background-image:linear-gradient(to top, rgba(0,0,0,0.5)50%,rgba(0,0,0,0.5)50%),url(assets/img/payroll.jfif);
       
     }
 
