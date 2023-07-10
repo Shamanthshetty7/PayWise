@@ -1,2 +1,2 @@
-# Salary_management_system
- Built a website for managing salary  based on project.
+# Payroll_management_system
+ A payroll management system used to maintain employees's monthly allowance,deduction and incentives. 
